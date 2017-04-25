@@ -93,10 +93,12 @@ final class MyJSON implements JSON {
 		// Get the string value within this object that has the given name. if
 		// there is no string with the given name, the method will return null.
 
+		// case 2
 		if (key != null && name.equals(key)) {
 			return val;
 		}
 
+		// case 3
 		if (keyList[0] != null) {
 			if (keyList[0].equals(name)) {
 				return valList[0];
@@ -117,17 +119,21 @@ final class MyJSON implements JSON {
 		// value
 		// should be overwritten. This method will always return a reference to
 		// "this".
-		if (name.equals(key)) {
-			if (keyList[0] != null) {
-				if (keyList[0].equals(name)) {
-					valList[0] = value;
-				} else if (keyList[1].equals(name)) {
-					valList[1] = value;
-				}
-			} else {
-				val = value;
+
+		// case 2
+		if (name.equals(key) && keyList[0] == null) {
+			val = value;
+		}
+
+		// case 3
+		if (keyList[0] != null) {
+			if (keyList[0].equals(name)) {
+				valList[0] = value;
+			} else if (keyList[1].equals(name)) {
+				valList[1] = value;
 			}
 		}
+
 		return this;
 	}
 
